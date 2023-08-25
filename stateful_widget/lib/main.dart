@@ -12,11 +12,11 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
-  int counter = 0;
+  bool showTitle = true;
 
-  void onClicked() {
+  void toggleTitle() {
     setState(() {
-      counter = counter + 1;
+      showTitle = !showTitle;
     });
   }
 
@@ -30,13 +30,19 @@ class _MyWidgetState extends State<MyWidget> {
             ),
           ),
         ),
-        home: const Scaffold(
-          backgroundColor: Color(0xFFF4EDDB),
+        home: Scaffold(
+          backgroundColor: const Color(0xFFF4EDDB),
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                MyLargeTitle(),
+                showTitle ? const MyLargeTitle() : const Text('nothing'),
+                IconButton(
+                  onPressed: toggleTitle,
+                  icon: const Icon(
+                    Icons.remove_red_eye,
+                  ),
+                )
               ],
             ),
           ),
@@ -44,10 +50,28 @@ class _MyWidgetState extends State<MyWidget> {
   }
 }
 
-class MyLargeTitle extends StatelessWidget {
+class MyLargeTitle extends StatefulWidget {
   const MyLargeTitle({
     super.key,
   });
+
+  @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+  // 초기화를 위한 메소드
+  // build 메소드보다 먼저 호출되어야하고 한 번만 호출됨
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // 위젯이 스크린에서 제거될 때 호출되는 메소드
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
