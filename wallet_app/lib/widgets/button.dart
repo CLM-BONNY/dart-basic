@@ -34,6 +34,5 @@ class Button extends StatelessWidget {
         ),
       ),
     );
-    throw UnimplementedError();
   }
 }
